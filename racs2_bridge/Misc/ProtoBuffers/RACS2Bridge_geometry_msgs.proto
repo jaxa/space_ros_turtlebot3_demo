@@ -1,0 +1,95 @@
+syntax = "proto2";
+
+message RACS2Bridge_geometry_msgs_Vector3 {
+    // -- geometry_msgs/Vector3 ----------------------------
+    required double x = 1;
+    required double y = 2;
+    required double z = 3;
+}
+
+message RACS2Bridge_geometry_msgs_Twist {
+    // -- geometry_msgs/Twist ------------------------------
+    required RACS2Bridge_geometry_msgs_Vector3 linear = 1;
+    required RACS2Bridge_geometry_msgs_Vector3 angular = 2;
+}
+
+message RACS2Bridge_geometry_msgs {
+    // -- geometry_msgs/AccelWithCovariance ----------------
+    repeated float accel_with_covariance_data = 1 [packed = true];
+
+    // -- geometry_msgs/AccelWithCovarianceStamped ---------
+    repeated float accel_with_covariance_stamped_data = 2 [packed = true];
+
+    // -- geometry_msgs/PointStamped -----------------------
+    repeated float point_stamped_data = 3 [packed = true];
+
+    // -- geometry_msgs/InertiaStamped ---------------------
+    repeated float inertia_stamped_data = 4 [packed = true];
+
+    // -- geometry_msgs/QuaternionStamped ------------------
+    repeated float quaternion_stamped_data = 5 [packed = true];
+
+    // -- geometry_msgs/TransformStamped -------------------
+    repeated float transform_stamped_data = 6 [packed = true];
+
+    // -- geometry_msgs/Inertia ----------------------------
+    repeated float inertia_data = 7 [packed = true];
+
+    // -- geometry_msgs/PoseWithCovariance -----------------
+    repeated float pose_with_covariance_data = 8 [packed = true];
+
+    // -- geometry_msgs/TwistWithCovarianceStamped ---------
+    repeated float twist_covariance_stamped_data = 9 [packed = true];
+
+    // -- geometry_msgs/Wrench -----------------------------
+    repeated float wrench_data = 10 [packed = true];
+
+    // -- geometry_msgs/Accel ------------------------------
+    repeated float accel_data = 11 [packed = true];
+
+    // -- geometry_msgs/PoseWithCovarianceStamped ----------
+    repeated float pose_with_covariance_stamped_data = 12 [packed = true];
+
+    // -- geometry_msgs/AccelStamped -----------------------
+    repeated float accele_stamped_data = 13 [packed = true];
+
+    // -- geometry_msgs/Transform --------------------------
+    repeated float transform_data = 14 [packed = true];
+
+    // -- geometry_msgs/Point ------------------------------
+    repeated float point_data = 15 [packed = true];
+
+    // -- geometry_msgs/PolygonStamped ---------------------
+    repeated float polygon_stamped_dta = 16 [packed = true];
+
+    // -- geometry_msgs/PoseArray --------------------------
+    repeated float pose_array_data = 17 [packed = true];
+
+    // -- geometry_msgs/Vector3Stamped ---------------------
+    repeated float vector3_stamped_data = 18 [packed = true];
+
+    // -- geometry_msgs/PoseStamped ------------------------
+    repeated float pose_stamped_data = 19 [packed = true];
+
+    // -- geometry_msgs/Polygon ----------------------------
+    repeated float polygon_data = 20 [packed = true];
+
+    // -- geometry_msgs/Quaternion -------------------------
+    repeated float queaternion_data = 21 [packed = true];
+
+    // -- geometry_msgs/Point32 ----------------------------
+    repeated float point32_data = 22 [packed = true];
+
+    // -- geometry_msgs/TwistWithCovariance ----------------
+    repeated float twist_with_covariance_data = 23 [packed = true];
+
+    // -- geometry_msgs/Pose -------------------------------
+    repeated float pose_data = 24 [packed = true];
+
+    // -- geometry_msgs/TwistStamped -----------------------
+    repeated float twist_stamped_data = 25 [packed = true];
+
+    // -- geometry_msgs/Pose2D -----------------------------
+    repeated float pose_2d_data = 26 [packed = true];
+
+}
