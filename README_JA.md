@@ -30,11 +30,11 @@
 
 Space ROSの一部であるRACS2(ROS2 and cFS System)は、フライト実績のあるNASAのフライトソフトウェアであるcFS(core Flight System)とROSを連携するパッケージです。cFSにより、ROSを用いた宇宙機システムで、宇宙機品質の安全性・信頼性を確保するサポートができます。
 
-![TurtleBot3](img/spacecraft_racs2_config.jpg)
+![TurtleBot3](img/spacecraft_racs2_config_JA.jpg)
 
 本パッケージでは、実機ロボット上でSpace ROSの一部であるこのRACS2を動かすことができます。具体的には、Turtlebot3のコンピュータであるRaspberry Pi 4上で、cFS、RACS2、ROS2を動作させます。
 
-![TurtleBot3](img/demos_racs2_config.jpg)
+![TurtleBot3](img/demos_racs2_config_JA.jpg)
 
 ロボットは、ROSの公式ロボットであるTurtleBot 3 Waffle PiとOpen MANIPULATOR-Xを組み合わせた構成となっています。ただし、本パッケージ自体は、TurtleBot3のみでも動作するので、Open MANIPULATOR-Xが無くても問題ありません。
 
