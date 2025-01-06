@@ -7,7 +7,7 @@
 
 
 ## 目次
-1. [**Space ROS (RACS2) demonstration based on TurtleBot3とは？**](#space-ros-racs2-demonstration-based-on-turtlebot3とは？)
+1. [**Space ROS (RACS2) demonstration based on TurtleBot3とは？**](#space-ros-racs2-demonstration-based-on-turtlebot3とは)
 
 2. [**ソフトウェア環境構築手順**](#ソフトウェア環境構築手順)
     1. [環境構築準備](#環境構築準備)
@@ -402,7 +402,7 @@ $ ros2 run bridge_py_s bridge_py_s_node --ros-args --params-file ./src/bridge_py
 
 ```
 $ ssh [Raspberry Pi hostname]@[Raspberry PiのIPアドレス]
-``
+```
 
 接続後、cFSプロジェクトパスに移動し、アプリの起動を行います。上記のTurtleBot3、racs2_bridgeの起動処理の完了後にcFSアプリの起動を行います。
 
