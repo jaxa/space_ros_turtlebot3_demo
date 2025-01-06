@@ -7,7 +7,7 @@
 
 
 ## 目次
-1. [**Space ROS (RACS2) demonstration based on TurtleBot3とは？**](#space-ros-racs2-demonstration-based-on-turtlebot3とは？)
+1. [**Space ROS (RACS2) demonstration based on TurtleBot3とは？**](#space-ros-racs2-demonstration-based-on-turtlebot3とは)
 
 2. [**ソフトウェア環境構築手順**](#ソフトウェア環境構築手順)
     1. [環境構築準備](#環境構築準備)
@@ -30,11 +30,11 @@
 
 Space ROSの一部であるRACS2(ROS2 and cFS System)は、フライト実績のあるNASAのフライトソフトウェアであるcFS(core Flight System)とROSを連携するパッケージです。cFSにより、ROSを用いた宇宙機システムで、宇宙機品質の安全性・信頼性を確保するサポートができます。
 
-![TurtleBot3](img/spacecraft_racs2_config_JA.jpg)
+![TurtleBot3](img/spacecraft_racs2_config.jpg)
 
 本パッケージでは、実機ロボット上でSpace ROSの一部であるこのRACS2を動かすことができます。具体的には、Turtlebot3のコンピュータであるRaspberry Pi 4上で、cFS、RACS2、ROS2を動作させます。
 
-![TurtleBot3](img/demos_racs2_config_JA.jpg)
+![TurtleBot3](img/demos_racs2_config.jpg)
 
 ロボットは、ROSの公式ロボットであるTurtleBot 3 Waffle PiとOpen MANIPULATOR-Xを組み合わせた構成となっています。ただし、本パッケージ自体は、TurtleBot3のみでも動作するので、Open MANIPULATOR-Xが無くても問題ありません。
 
@@ -402,7 +402,7 @@ $ ros2 run bridge_py_s bridge_py_s_node --ros-args --params-file ./src/bridge_py
 
 ```
 $ ssh [Raspberry Pi hostname]@[Raspberry PiのIPアドレス]
-``
+```
 
 接続後、cFSプロジェクトパスに移動し、アプリの起動を行います。上記のTurtleBot3、racs2_bridgeの起動処理の完了後にcFSアプリの起動を行います。
 
