@@ -3,9 +3,9 @@
 [![README in English](https://img.shields.io/badge/English-d9d9d9)](./README.md)
 [![日本語版 README](https://img.shields.io/badge/日本語-d9d9d9)](./README_JA.md)
 
-![GitHub all releases](https://img.shields.io/github/downloads/jaxa/space_ros_turtlebot3_demo/total)
 ![GitHub contributors](https://img.shields.io/github/contributors/jaxa/space_ros_turtlebot3_demo)
 ![GitHub issues](https://img.shields.io/github/issues/jaxa/space_ros_turtlebot3_demo)
+![GitHub fork](https://img.shields.io/github/forks/jaxa/space_ros_turtlebot3_demo)
 ![GitHub stars](https://img.shields.io/github/stars/jaxa/space_ros_turtlebot3_demo?style=social)
 
 ![TurtleBot3](img/turtlebot3.jpg)
