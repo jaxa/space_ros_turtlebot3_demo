@@ -3,6 +3,11 @@
 [![README in English](https://img.shields.io/badge/English-d9d9d9)](./README.md)
 [![日本語版 README](https://img.shields.io/badge/日本語-d9d9d9)](./README_JA.md)
 
+![GitHub all releases](https://img.shields.io/github/downloads/jaxa/space_ros_turtlebot3_demo/total)
+![GitHub contributors](https://img.shields.io/github/contributors/jaxa/space_ros_turtlebot3_demo)
+![GitHub issues](https://img.shields.io/github/issues/jaxa/space_ros_turtlebot3_demo)
+![GitHub stars](https://img.shields.io/github/stars/jaxa/space_ros_turtlebot3_demo?style=social)
+
 ![TurtleBot3](img/turtlebot3.jpg)
 
 
@@ -26,21 +31,24 @@
 
 
 ## Space ROS (RACS2) demonstration based on TurtleBot3とは？
+
 本パッケージは、宇宙ロボットのオープンソースプラットフォームであるSpace ROS(RACS2)を実機ロボット上で動作させるための実証プラットフォームです。
 
-Space ROSの一部であるRACS2(ROS2 and cFS System)は、フライト実績のあるNASAのフライトソフトウェアであるcFS(core Flight System)とROSを連携するパッケージです。cFSにより、ROSを用いた宇宙機システムで、宇宙機品質の安全性・信頼性を確保するサポートができます。
+Space ROSの一部であるRACS2(ROS 2 and cFS System)は、フライト実績のあるNASAのフライトソフトウェアであるcFS(core Flight System)とROS 2を連携するパッケージです。cFSにより、ROS 2を用いた宇宙機システムで、宇宙機品質の安全性・信頼性を確保するサポートができます。
 
-![TurtleBot3](img/spacecraft_racs2_config_JA.jpg)
+![SpaceCraft RACS2](img/spacecraft_racs2_config_JA.jpg)
 
 本パッケージでは、実機ロボット上でSpace ROSの一部であるこのRACS2を動かすことができます。具体的には、Turtlebot3のコンピュータであるRaspberry Pi 4上で、cFS、RACS2、ROS2を動作させます。
 
-![TurtleBot3](img/demos_racs2_config_JA.jpg)
+![Demos RACS2](img/demos_racs2_config_JA.jpg)
 
 ロボットは、ROSの公式ロボットであるTurtleBot 3 Waffle PiとOpen MANIPULATOR-Xを組み合わせた構成となっています。ただし、本パッケージ自体は、TurtleBot3のみでも動作するので、Open MANIPULATOR-Xが無くても問題ありません。
+
 
 ## ソフトウェア環境構築手順
 
 ### 環境構築準備
+
 本パッケージを動作させる環境構築を行うため、以下のものが必要です。
 
 - TurtleBot3 (組み立て済み)
@@ -51,45 +59,35 @@ Space ROSの一部であるRACS2(ROS2 and cFS System)は、フライト実績の
 - micro SDカード (Turtlebot3のRaspberry Pi用、32GBが必要)
 
 ### PCのセットアップ
-TurtleBot3のリモート操作を行うPCのセットアップを行います。
 
 #### Ubuntuのインストール
+
 以下のリンクから、PCにUbuntuをダウンロードしてインストールします。
 
-- https://releases.ubuntu.com/22.04/
+- [Ubuntu 22.04](https://releases.ubuntu.com/22.04/)
 
 以下の手順に従い、Ubuntuをインストールします。
 
-- https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview
+- [Ubuntuインストールガイド](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)
 
 #### ROS 2のインストール
+
 以下の手順に従い、ROS 2 Humbleをインストールします。
 
-- https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+- [ROS 2インストールガイド](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-次に、依存するROS2パッケージのインストールを行っていきます。
-
-以下のコマンドを実行して、Gazeboをインストールします。
+以下のコマンドを実行し、依存するROS2パッケージをインストールします。
 
 ```
 $ sudo apt install ros-humble-gazebo-*
-```
-
-以下のコマンドを実行して、Cartographerをインストールします。
-
-```
 $ sudo apt install ros-humble-cartographer
 $ sudo apt install ros-humble-cartographer-ros
-```
-
-以下のコマンドを実行して、Navigation2をインストールします。
-
-```
 $ sudo apt install ros-humble-navigation2
 $ sudo apt install ros-humble-nav2-bringup
 ```
 
 #### TurtleBot3パッケージのインストール
+
 以下のコマンドを実行して、Debianパッケージ経由でTurtleBot3の関連パッケージをインストールします。
 
 ```
@@ -116,6 +114,7 @@ $ source ~/.bashrc
 ```
 
 #### PCの環境設定
+
 以下のコマンドを実行して、PCのROS環境を設定します。
 
 ```
@@ -124,25 +123,28 @@ $ source ~/.bashrc
 ```
 
 ### TurtleBot3 - Raspberry Piのセットアップ
+
 TurtleBot3上にあるRaspberry Piのセットアップを行います。
 
 #### Raspberry Pi Imagerでのセットアップ
-Raspberry Pi用のUbuntu Server 22.04をダウンロードするため、何かしらのPCにRaspberry Pi Imagerのインストールを行います。Raspberry Pi Imagerのインストールは、以下のリンクから行います。Raspberry Pi ImagerをインストールするPCは、TurtleBot3をリモート操作するためのPCでも、その他のPCでも問題ありません。
 
-- https://www.raspberrypi.com/software/
+任意のPCにRaspberry Pi Imagerをインストールします (TurtleBot3のリモート操作に使用するPCと同じもので構いません)。
+
+- [Raspberry Pi Imagerインストールガイド](https://www.raspberrypi.com/software/)
 
 インストール後、micro SDカードをPCに挿入し、Raspberry Pi Imagerを起動します。起動したら、以下の手順に従い、micro SDにUbuntu Server 22.04をインストールします。
 
-- 「CHOOSE OS」をクリックする。
-- 「Other general-purpose OS」をクリックする。
-- 「Ubuntu」を選択する。
-- 「Ubuntu Server 22.04.5 LTS(RPi 3/4/400) (64-bit)」を選択する。
-- CHOOSE STORAGEで挿入したmicro SDカードを選択する。
-- 書き込みを実行する。
+1. 「CHOOSE OS」をクリックする。
+2. 「Other general-purpose OS」をクリックする。
+3. 「Ubuntu」を選択する。
+4. 「Ubuntu Server 22.04.5 LTS(RPi 3/4/400) (64-bit)」を選択する。
+5. CHOOSE STORAGEで挿入したmicro SDカードを選択する。
+6. 書き込みを実行する。
 
 書き込みが完了したら、micro SDカードをRaspberry Piに移します。そして、Raspberry Piにディスプレイ、キーボード類を接続した上で、Ubuntuのインストール設定とインストールを行います。インストールが完了したら、再起動します。
 
 #### Raspberry Piのセットアップ
+
 Raspberry Piは起動時時刻設定がリセットされるため、ネットワーク設定からWi-Fiに接続し、自動で時刻を設定するようにします。設定ファイルである`/etc/systemd/timesyncd.conf`を開き、以下のように編集します。
 
 ```
@@ -177,11 +179,18 @@ Raspberry Piの再起動を行い、時刻があっていることを確認し�
 $ sudo date -s “yyyy/mm/dd hh:mm:ss”
 ```
 
-次に、以下のリンクを参考にROS2 Humbleのインストールを行います。
+以下のコマンドを実行し、本パッケージをダウンロードします。`[Space TurtleBot workspace path]`には、本パッケージを格納する任意のファイルパスを入力してください。
 
-- https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+```
+$ cd [space turtlebot workspace path]
+$ git clone https://github.com/jaxa/space_ros_turtlebot3_demo.git
+```
 
-この際、以下のコマンドを実行して、ROSパッケージをインストール & ビルドします。パッケージのビルドには20分ほどかかる場合があります。
+以下のROS 2インストールガイドを使ってROS 2 HumbleをRaspberry Piにインストールします。
+
+- [ROS 2 Installation Guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+
+以下のコマンドを実行して、ROS 2パッケージをインストール & ビルドします。
 
 ```
 $ sudo apt install python3-argcomplete python3-colcon-common-extensions libboost-system-dev build-essential
@@ -190,7 +199,7 @@ $ sudo apt install ros-humble-turtlebot3-msgs
 $ sudo apt install ros-humble-dynamixel-sdk
 $ sudo apt install libudev-dev
 $ mkdir -p ~/turtlebot3_ws/src && cd ~/turtlebot3_ws/src
-$ cp ~/[納品物格納スペース]/turtlebot3 ./
+$ cp ~/[space turtlebot workspace path]/turtlebot3 ./
 $ git clone -b ros2-devel https://github.com/ROBOTIS-GIT/ld08_driver.git
 $ cd ~/turtlebot3_ws/src/turtlebot3
 $ cd ~/turtlebot3_ws/
@@ -209,7 +218,7 @@ $ sudo udevadm control --reload-rules
 $ sudo udevadm trigger
 ```
 
-TurtleBot3をリモート操作するためのPCと、同じネットワーク環境で通信を行うため、PCとTurtleBot3の間でROS 2ドメインIDを一致させる必要があります。以下のコマンドを実行し、その設定を行います。この際、競合が発生するため、同じネットワーク間で同じROS2ドメインIDを使用しないようにしてください。
+以下のコマンドを実行し、PCとTurtleBot3の間でROS 2のドメインIDを一致させます。
 
 ```
 $ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
@@ -224,9 +233,8 @@ $ source ~/.bashrc
 ```
 
 ### TurtleBot3 - OpenCRのセットアップ
-OpenCRとRaspberry Piを接続し、必要なパッケージをRaspberry Piにインストールします。
 
-以下のコマンドを実行し、必要なパッケージをインストールします。
+OpenCRとRaspberry Piを接続し、以下のコマンドを実行して、必要なパッケージをRaspberry Piにインストールします。
 
 ```
 $ sudo dpkg --add-architecture armhf
@@ -252,27 +260,20 @@ $ ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
 ```
 
 正常にアップロードされると、ターミナルに`jump_to_fw`が表示されます。もし失敗した場合は、以下TurtleBot3 e-manualの3.3.7を参考にリカバリーモードで再度アップロードしてみてください。
-- https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup/#opencr-setup
+
+- [TurtleBot3 e-manual](https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup/#opencr-setup)
 
 <!-- ### Open MANIPULATOR-Xのセットアップ -->
 <!-- 未実装 -->
 
 ### cFS(core Flght System)のセットアップ
-Raspberry Pi上で、cFS(core Flght System)のセットアップを行います。
 
-以下のコマンドを実行し、cFSをダウンロードします。`[cFS workspace path]`には、cFSを格納する任意のファイルパスを入力してください。
+以下のコマンドを実行し、cFS(core Flght System)をダウンロードします。`[cFS workspace path]`には、cFSを格納する任意のファイルパスを入力してください。
 
 ```
 $ cd [cFS workspace path]
 $ git clone https://github.com/nasa/cFS.git
 $ cd /cFS
-$ git submodule init
-$ git submodule update
-```
-
-cFSのバージョンが`v6.7.0a`ではない場合、以下のコマンドを実行して、バージョンを指定します。
-
-```
 $ git checkout v6.7.0a
 $ git submodule init
 $ git submodule update
@@ -286,9 +287,11 @@ $ cp -r cfe/cmake/sample_defs ./
 ```
 
 ### RACS2(ROS 2 and cFS System)のセットアップ
-Raspberry Pi上で、RACS2(ROS 2 and cFS System)のセットアップを行います。今回は、`racs2_bridge`パッケージを用います。
+
+RACS2(ROS 2 and cFS System)のパッケージである`racs2_bridge`をインストールします。
 
 #### 事前準備
+
 事前準備として、以下のコマンドを実行し、WebSocketをインストールします。
 
 ```
@@ -303,14 +306,8 @@ $ pip install protobuf websockets
 $ sudo apt install -y libwebsockets-dev protobuf-c-compiler libprotobuf-c-dev libprotobuf-dev
 ```
 
-以下のコマンドを実行し、本パッケージをダウンロードします。`[Space TurtleBot workspace path]`には、本パッケージを格納する任意のファイルパスを入力してください。
+#### ROS 2側の設定
 
-```
-$ cd [Space TurtleBot workspace path]
-$ git clone https://github.com/jaxa/space_ros_turtlebot3_demo.git
-```
-
-#### ROS 2側のセットアップ
 以下のコマンドを実行し、`turtlebot3_ws`に`bridge node`を配置します。
 
 ```
@@ -325,6 +322,7 @@ $ colcon build --symlink-install --parallel-workers 1
 ```
 
 #### cFS側のセットアップ
+
 以下のコマンドを実行し、cFS環境にbridgeアプリを配置します。
 
 ```
@@ -354,13 +352,15 @@ $ make install
 ## ソフトウェア操作手順
 
 ### 操作の前提
-本パッケージでのロボットの操作は、TurtleBot3上のRaspberry Piに、キーボードやディスプレイ等を接続しての操作する方法と、PCからのリモートで接続し、操作する方法の、どちらも可能となっています。ここでは、例としてPCからのリモートで接続し、操作する方法で、TurtleBot3の操作を行います。
+
+本パッケージでのロボットの操作は、Raspberry Piから直接操作する方法と、PCからのリモートで接続し、操作する方法があります。ここでは、例としてPCからのリモートで接続し、操作する方法を用います。
 
 ### TurtleBot3制御ソフトウェアの起動
-PCからRaspberry Piにssh接続します。`[Raspberry Pi hostname]`には、Raspberry Piのホスト名を入力してください。また、`[Raspberry Pi IP address]`には、Raspberry PiのIPアドレスを入力してください。
+
+以下のコマンドを実行し、PCからRaspberry Piにssh接続します。`[raspberry pi hostname]`には、Raspberry Piのホスト名を入力します。また、`[raspberry pi ip address]`には、Raspberry PiのIPアドレスを入力してください。
 
 ```
-$ ssh [Raspberry Pi hostname]@[Raspberry PiのIPアドレス]
+$ ssh [raspberry pi hostname]@[raspberry pi ip address]
 ```
 
 接続後、TurtleBot3プロジェクトパスに移動し、パラメータ設定を行います。
@@ -371,20 +371,21 @@ $ source install/setup.bash
 $ export TURTLEBOT3_MODEL=waffle_pi
 ```
 
-TurtleBot3制御ソフトウェアを起動します。
+以下のコマンドを実行し、TurtleBot3制御ソフトウェアを起動します。
 
 ```
 $ ros2 launch turtlebot3_bringup robot.launch.py
 ```
 
 ### racs2_bridgeの起動
+
 別のターミナルを起動し、同様の手順で、PCからRaspberry Piにssh接続します。
 
 ```
 $ ssh [Raspberry Pi hostname]@[Raspberry PiのIPアドレス]
 ```
 
-接続後、TurtleBot3プロジェクトパスに移動します。
+接続後、以下のコマンドを実行し、TurtleBot3プロジェクトパスに移動します。
 
 ```
 $ cd ~/turtlebot3_ws
@@ -398,6 +399,7 @@ $ ros2 run bridge_py_s bridge_py_s_node --ros-args --params-file ./src/bridge_py
 ```
 
 ### cFSアプリの起動
+
 別のターミナルを起動し、同様の手順で、PCからRaspberry Piにssh接続します。
 
 ```
@@ -412,19 +414,16 @@ $ ./core-cpu1
 ```
 
 ### 操作方法
-キーボード入力により速度の変更を行います。コマンドは以下のように設定されており、速度の段階的な調整が可能となっています。
 
-| 入力キー |  動作  |   動作速度   | 上限値・下限値 |
-|:-------:|:------:|:-----------:|:-------------:|
-|    w    |  前進  | +0.01[m/s]  |    0.26[m/s]  |
-|    x    |  後進  | -0.01[m/s]  |   -0.26[m/s]  |
-|    a    | 左旋回 | +0.1[rad/s] |    1.8[rad/s] |
-|    d    | 右旋回 | -0.1[rad/s] |   -1.8[rad/s] |
-|    s    |  停止  |      0      |       —       |
+cFSのターミナルでキーボード入力をすることにより、ロボットの速度を操作します。コマンドは以下のように設定されています。
 
-cFSアプリを立ち上げているターミナルを選択した状態で、キーボード入力を行うことで速度調節が可能です。この際、キーボード入力を行った回数分速度が変化します。ただし、何度もキーボード入力を行うと、大幅に速度が変化するため、注意する必要があります。上記キー以外を入力した場合、エラーは表示されますが、速度変更に影響はありません。
-
-また、cFSアプリのログから、入力した動作と現在速度の確認ができます。TurtleBot3のログでも現在速度の確認ができます。
+| 入力キー |  動作  |   動作速度   |  上限値・下限値 |
+|:-------:|:------:|:-----------:|:--------------:|
+|    w    |  前進  | +0.01 [m/s]  |    0.26 [m/s]  |
+|    x    |  後進  | -0.01 [m/s]  |   -0.26 [m/s]  |
+|    a    | 左旋回 | +0.1 [rad/s] |    1.8 [rad/s] |
+|    d    | 右旋回 | -0.1 [rad/s] |   -1.8 [rad/s] |
+|    s    |  停止  |       0      |       N/A      |
 
 プログラムを終了する際は、各ターミナルで[Ctrl]+[C]キーを入力します。
 
