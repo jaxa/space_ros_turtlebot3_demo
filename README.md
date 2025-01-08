@@ -1,4 +1,4 @@
-# Space ROS (RACS2) demonstration based on TurtleBot3
+# Space ROS (RACS2) Demonstration Based on TurtleBot3
 
 [![README in English](https://img.shields.io/badge/English-d9d9d9)](./README.md)
 [![日本語版 README](https://img.shields.io/badge/日本語-d9d9d9)](./README_JA.md)
@@ -30,19 +30,19 @@
     5. [How to Operate](#how-to-operate)
 
 
-## What is Space ROS (RACS2) demonstration based on TurtleBot3
+## What is Space ROS (RACS2) Demonstration Based on TurtleBot3
 
 This package is a demonstration platform for running the Space ROS (RACS2) open-source platform for space robots on an actual robot.
 
 RACS2 (ROS 2 and cFS System), a part of Space ROS, is a package that integrates NASA's flight-proven Core Flight System (cFS) with ROS 2. The cFS provides support for ensuring spacecraft-grade safety and reliability in space systems using ROS 2.
 
-![TurtleBot3](img/spacecraft_racs2_config.jpg)
+![SpaceCraft RACS2](img/spacecraft_racs2_config.jpg)
 
 This package allows you to run RACS2, a part of Space ROS, on an actual robot. Specifically, it operates cFS, RACS2, and ROS 2 on the Raspberry Pi 4, which serves as the computer for the TurtleBot3.
 
-![TurtleBot3](img/demos_racs2_config.jpg)
+![Demos RACS2](img/demos_racs2_config.jpg)
 
-The robot consists of the TurtleBot 3 Waffle Pi, the official robot of ROS, combined with the Open MANIPULATOR-X. However, this package can operate with only the TurtleBot3, so the Open MANIPULATOR-X is not required.
+The robot setup features the TurtleBot3 Waffle Pi, the official robot of ROS, optionally paired with the Open MANIPULATOR-X. However, the Open MANIPULATOR-X is not required to operate this package.
 
 
 ## Software Environment Setup
@@ -66,13 +66,13 @@ Download and install Ubuntu on your PC from the following link:
 
 - [Ubuntu 22.04](https://releases.ubuntu.com/22.04/)
 
-Follow the steps provided in the installation guide:
+Follow the steps below to install Ubuntu on PC:
 
 - [Ubuntu Installation Guide](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)
 
 #### Installing ROS 2
 
-Follow the steps below to install ROS 2 Humble:
+Follow the steps below to install ROS 2 Humble on PC:
 
 - [ROS 2 Installation Guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
@@ -88,7 +88,7 @@ $ sudo apt install ros-humble-nav2-bringup
 
 #### Installing TurtleBot3 Packages
 
-Install the TurtleBot3 packages via the following commands:
+Install the TurtleBot3 packages:
 
 ```
 $ source ~/.bashrc
@@ -97,7 +97,7 @@ $ sudo apt install ros-humble-turtlebot3-msgs
 $ sudo apt install ros-humble-turtlebot3
 ```
 
-Build the packages as follows:
+Build the packages:
 
 ```
 $ sudo apt remove ros-humble-turtlebot3-msgs
@@ -115,7 +115,7 @@ $ source ~/.bashrc
 
 #### Setting Up the PC Environment
 
-Configure the ROS environment on the PC using the following command:
+Configure the ROS environment on the PC:
 
 ```
 $ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
@@ -160,13 +160,13 @@ FallbackNTP=time.google.com
 #PollIntervalMaxSec=2048
 ```
 
-Enable NTP with the following command:
+Enable NTP:
 
 ```
 $ sudo timedatectl set-ntp true
 ```
 
-Restart the service using the following command:
+Restart the service:
 
 ```
 $ sudo systemctl daemon-reload
@@ -179,18 +179,18 @@ Reboot the Raspberry Pi and confirm the time settings are correct. If the config
 $ sudo date -s “yyyy/mm/dd hh:mm:ss”
 ```
 
-Download this package using the following commands: In `[space turtlebot workspace path]`, enter any file path where you want to store this package.
+Download this package: In `[space turtlebot workspace path]`, enter any file path where you want to store this package.
 
 ```
 $ cd [space turtlebot workspace path]
 $ git clone https://github.com/jaxa/space_ros_turtlebot3_demo.git
 ```
 
-Install ROS 2 Humble on the Raspberry Pi using the ROS 2 Installation Guide.
+Follow the steps below to install ROS 2 Humble on the Raspberry Pi:
 
 - [ROS 2 Installation Guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-Install and build the ROS 2 package using the following commands: 
+Install and build the ROS 2 packages:
 
 ```
 $ sudo apt install python3-argcomplete python3-colcon-common-extensions libboost-system-dev build-essential
@@ -210,7 +210,7 @@ $ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-Configure the USB port settings for OpenCR on TurtleBot3 using the following commands:
+Configure the USB port settings for OpenCR on TurtleBot3:
 
 ```
 $ sudo cp `ros2 pkg prefix turtlebot3_bringup`/share/turtlebot3_bringup/script/99-turtlebot3-cdc.rules /etc/udev/rules.d/
@@ -225,7 +225,7 @@ $ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-Configure the LDS model using the following commands:
+Configure the LDS model:
 
 ```
 $ echo 'export LDS_MODEL=LDS-02' >> ~/.bashrc
@@ -234,7 +234,7 @@ $ source ~/.bashrc
 
 ### TurtleBot3 - OpenCR Setup
 
-Connect the OpenCR to the Raspberry Pi and install the necessary firmware using the following commands:
+Connect the OpenCR to the Raspberry Pi and install the necessary firmware:
 
 ```
 $ sudo dpkg --add-architecture armhf
@@ -245,14 +245,14 @@ $ export OPENCR_MODEL=waffle
 $ rm -rf ./opencr_update.tar.bz2
 ```
 
-Download the firmware and loader using the following commands:
+Download the firmware and loader:
 
 ```
 $ wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS2/latest/opencr_update.tar.bz2
 $ tar -xvf ./opencr_update.tar.bz2
 ```
 
-Upload the firmware to OpenCR using the following commands:
+Upload the firmware to OpenCR:
 
 ```
 $ cd ~/opencr_update
@@ -268,7 +268,7 @@ If the upload is successful, `jump_to_fw` will be displayed in the terminal. If 
 
 ### cFS (Core Flight System) Setup
 
-Clone and configure the Core Flight System (cFS) using the following commands: In `[cfs workspace path]`, enter any file path where you want to store cFS.
+Clone and configure the Core Flight System (cFS): In `[cfs workspace path]`, enter any file path where you want to store cFS.
 
 ```
 $ cd [cFS workspace path]
@@ -279,7 +279,7 @@ $ git submodule init
 $ git submodule update
 ```
 
-Copy the sample code using the following commands:
+Copy the sample code:
 
 ```
 $ cp cfe/cmake/Makefile.sample Makefile
@@ -292,7 +292,7 @@ Install the racs2_bridge package, which is part of the RACS2 (ROS 2 and cFS Syst
 
 #### Advance Preparation
 
-Install WebSocket using the following commands:
+Install WebSocket:
 
 ```
 $ sudo apt install -y libwebsockets-dev
@@ -300,7 +300,7 @@ $ sudo apt install -y pip
 $ pip install protobuf websockets
 ```
 
-Install Protocol Buffers using the following commands:
+Install Protocol Buffers:
 
 ```
 $ sudo apt install -y libwebsockets-dev protobuf-c-compiler libprotobuf-c-dev libprotobuf-dev
@@ -308,13 +308,13 @@ $ sudo apt install -y libwebsockets-dev protobuf-c-compiler libprotobuf-c-dev li
 
 #### Settings on the ROS 2 side
 
-Place the `bridge node` in the `turtlebot3_ws` by executing the following commands:
+Place the `bridge node` in the `turtlebot3_ws`:
 
 ```
 $ cp -pr ~/[Space TurtleBot workspace path]/space_ros_turtlebot3_demo/racs2_bridge/ROS2/Bridge/Server_Python/bridge_py_s ~/turtlebot3_ws/src
 ```
 
-Return to the root of the TurtleBot3 project and build it using the following commands:
+Return to the root of the TurtleBot3 project and build it:
 
 ```
 $ cd ~/turtlebot3_ws
@@ -323,7 +323,7 @@ $ colcon build --symlink-install --parallel-workers 1
 
 #### Settings on the cFS side
 
-Deploy the bridge app to the cFS environment using the following commands:
+Deploy the bridge app to the cFS environment:
 
 ```
 $ cp -pr ~/[Space TurtleBot workspace path]/space_ros_turtlebot3_demo/racs2_bridge/cFS/Bridge/Client_C/apps/racs2_bridge_client ~/[cFS workspace path]/cFS/apps/
@@ -337,7 +337,7 @@ Edit L.205 of `[cFS workspace path]/cFS/sample_defs/default_osconfig.h` as follo
 #define OSAL_DEBUG_PERMISSIVE_MODE
 ```
 
-Return to the root of the cFS project and build it using the following commands:
+Return to the root of the cFS project and build it:
 
 ```
 $ cd [cFS project path]
@@ -357,7 +357,7 @@ You can operate the robot either directly via the Raspberry Pi or remotely from 
 
 ### Launching the TurtleBot3 Control Software
 
-Connect to the Raspberry Pi via SSH from the PC using the following commands: In `[raspberry pi hostname]`, enter the hostname of the Raspberry Pi, and in `[raspberry pi ip address]`, enter the IP address of the Raspberry Pi.
+Connect to the Raspberry Pi via SSH from the PC: In `[raspberry pi hostname]`, enter the hostname of the Raspberry Pi, and in `[raspberry pi ip address]`, enter the IP address of the Raspberry Pi.
 
 ```
 $ ssh [raspberry pi hostname]@[raspberry pi ip address]
@@ -371,7 +371,7 @@ $ source install/setup.bash
 $ export TURTLEBOT3_MODEL=waffle_pi
 ```
 
-Launch the TurtleBot3 control software using the following commands:
+Launch the TurtleBot3 control software:
 
 ```
 $ ros2 launch turtlebot3_bringup robot.launch.py
@@ -385,14 +385,14 @@ Open another terminal and connect to the Raspberry Pi via SSH from the PC using 
 $ ssh [raspberry pi hostname]@[raspberry pi ip address]
 ```
 
-After connecting, navigate to the TurtleBot3 project path using the following commands:
+After connecting, navigate to the TurtleBot3 project path:
 
 ```
 $ cd ~/turtlebot3_ws
 $ source install/setup.bash
 ```
 
-Launch the node using the following commands:
+Launch the node:
 
 ```
 $ ros2 run bridge_py_s bridge_py_s_node --ros-args --params-file ./src/bridge_py_s/config/params.yaml
@@ -406,7 +406,7 @@ Open another terminal and connect to the Raspberry Pi via SSH from the PC using 
 $ ssh [raspberry pi hostname]@[raspberry pi ip address]
 ```
 
-After connecting, navigate to the cFS project path and launch the application using the following commands:
+After connecting, navigate to the cFS project path and launch the application:
 
 ```
 $ cd [cFS workspace path]/cFS/build/exe/cpu1

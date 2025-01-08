@@ -1,4 +1,4 @@
-# Space ROS (RACS2) demonstration based on TurtleBot3
+# TurtleBot3を用いたSpace ROS(RACS2)のデモンストレーション
 
 [![README in English](https://img.shields.io/badge/English-d9d9d9)](./README.md)
 [![日本語版 README](https://img.shields.io/badge/日本語-d9d9d9)](./README_JA.md)
@@ -12,7 +12,7 @@
 
 
 ## 目次
-1. [**Space ROS (RACS2) demonstration based on TurtleBot3とは？**](#space-ros-racs2-demonstration-based-on-turtlebot3とは)
+1. [**TurtleBot3を用いたSpace ROS(RACS2)のデモンストレーションとは？**](#turtlebot3を用いたspace-rosracs2のデモンストレーションとは)
 
 2. [**ソフトウェア環境構築手順**](#ソフトウェア環境構築手順)
     1. [環境構築準備](#環境構築準備)
@@ -30,7 +30,7 @@
     5. [操作方法](#操作方法)
 
 
-## Space ROS (RACS2) demonstration based on TurtleBot3とは？
+## TurtleBot3を用いたSpace ROS(RACS2)のデモンストレーションとは？
 
 本パッケージは、宇宙ロボットのオープンソースプラットフォームであるSpace ROS(RACS2)を実機ロボット上で動作させるための実証プラットフォームです。
 
@@ -42,7 +42,7 @@ Space ROSの一部であるRACS2(ROS 2 and cFS System)は、フライト実績�
 
 ![Demos RACS2](img/demos_racs2_config_JA.jpg)
 
-ロボットは、ROSの公式ロボットであるTurtleBot 3 Waffle PiとOpen MANIPULATOR-Xを組み合わせた構成となっています。ただし、本パッケージ自体は、TurtleBot3のみでも動作するので、Open MANIPULATOR-Xが無くても問題ありません。
+ロボットは、ROSの公式ロボットであるTurtleBot 3 Waffle PiとオプションとしてOpen MANIPULATOR-Xを組み合わせた構成となっています。ただし、本パッケージ自体は、TurtleBot3のみでも動作するので、Open MANIPULATOR-Xが無くても問題ありません。
 
 
 ## ソフトウェア環境構築手順
@@ -66,17 +66,17 @@ Space ROSの一部であるRACS2(ROS 2 and cFS System)は、フライト実績�
 
 - [Ubuntu 22.04](https://releases.ubuntu.com/22.04/)
 
-以下の手順に従い、Ubuntuをインストールします。
+以下の手順に従い、PCにUbuntuをインストールします。
 
 - [Ubuntuインストールガイド](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)
 
 #### ROS 2のインストール
 
-以下の手順に従い、ROS 2 Humbleをインストールします。
+以下の手順に従い、PCにROS 2 Humbleをインストールします。
 
 - [ROS 2インストールガイド](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-以下のコマンドを実行し、依存するROS2パッケージをインストールします。
+依存するROS2パッケージをインストールします。
 
 ```
 $ sudo apt install ros-humble-gazebo-*
@@ -88,7 +88,7 @@ $ sudo apt install ros-humble-nav2-bringup
 
 #### TurtleBot3パッケージのインストール
 
-以下のコマンドを実行して、Debianパッケージ経由でTurtleBot3の関連パッケージをインストールします。
+Debianパッケージ経由でTurtleBot3の関連パッケージをインストールします。
 
 ```
 $ source ~/.bashrc
@@ -97,7 +97,7 @@ $ sudo apt install ros-humble-turtlebot3-msgs
 $ sudo apt install ros-humble-turtlebot3
 ```
 
-以下のコマンドを実行して、パッケージのビルドを行います。
+パッケージをビルドします。
 
 ```
 $ sudo apt remove ros-humble-turtlebot3-msgs
@@ -115,7 +115,7 @@ $ source ~/.bashrc
 
 #### PCの環境設定
 
-以下のコマンドを実行して、PCのROS環境を設定します。
+PCのROS環境を設定します。
 
 ```
 $ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
@@ -160,13 +160,13 @@ FallbackNTP=time.google.com
 #PollIntervalMaxSec=2048
 ```
 
-以下のコマンドを実行して、NTPの有効化します。
+NTPの有効化します。
 
 ```
 $ sudo timedatectl set-ntp true
 ```
 
-以下のコマンドを実行して、サービスを再起動します。
+サービスを再起動します。
 
 ```
 $ sudo systemctl daemon-reload
@@ -179,18 +179,18 @@ Raspberry Piの再起動を行い、時刻があっていることを確認し�
 $ sudo date -s “yyyy/mm/dd hh:mm:ss”
 ```
 
-以下のコマンドを実行し、本パッケージをダウンロードします。`[Space TurtleBot workspace path]`には、本パッケージを格納する任意のファイルパスを入力してください。
+本パッケージをダウンロードします。`[Space TurtleBot workspace path]`には、本パッケージを格納する任意のファイルパスを入力してください。
 
 ```
 $ cd [space turtlebot workspace path]
 $ git clone https://github.com/jaxa/space_ros_turtlebot3_demo.git
 ```
 
-以下のROS 2インストールガイドを使ってROS 2 HumbleをRaspberry Piにインストールします。
+以下の手順に従い、Raspberry PiにROS 2 Humbleをインストールします。
 
 - [ROS 2 Installation Guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-以下のコマンドを実行して、ROS 2パッケージをインストール & ビルドします。
+ROS 2パッケージをインストール & ビルドします。
 
 ```
 $ sudo apt install python3-argcomplete python3-colcon-common-extensions libboost-system-dev build-essential
@@ -210,7 +210,7 @@ $ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-以下のコマンドを実行し、TurtleBot3に搭載しているOpenCRのUSBポート設定を行います。
+TurtleBot3に搭載しているOpenCRのUSBポート設定を行います。
 
 ```
 $ sudo cp `ros2 pkg prefix turtlebot3_bringup`/share/turtlebot3_bringup/script/99-turtlebot3-cdc.rules /etc/udev/rules.d/
@@ -218,14 +218,14 @@ $ sudo udevadm control --reload-rules
 $ sudo udevadm trigger
 ```
 
-以下のコマンドを実行し、PCとTurtleBot3の間でROS 2のドメインIDを一致させます。
+PCとTurtleBot3の間でROS 2のドメインIDを一致させます。
 
 ```
 $ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-以下のコマンドを実行し、LDSモデルの設定を行います。
+LDSモデルの設定を行います。
 
 ```
 $ echo 'export LDS_MODEL=LDS-02' >> ~/.bashrc
@@ -234,7 +234,7 @@ $ source ~/.bashrc
 
 ### TurtleBot3 - OpenCRのセットアップ
 
-OpenCRとRaspberry Piを接続し、以下のコマンドを実行して、必要なパッケージをRaspberry Piにインストールします。
+OpenCRとRaspberry Piを接続し、必要なパッケージをRaspberry Piにインストールします。
 
 ```
 $ sudo dpkg --add-architecture armhf
@@ -245,14 +245,14 @@ $ export OPENCR_MODEL=waffle
 $ rm -rf ./opencr_update.tar.bz2
 ```
 
-以下のコマンドを実行し、ファームウェアとローダーのダウンロードを行います。
+ファームウェアとローダーのダウンロードを行います。
 
 ```
 $ wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS2/latest/opencr_update.tar.bz2
 $ tar -xvf ./opencr_update.tar.bz2
 ```
 
-以下のコマンドを実行し、ファームウェアをOpenCRにアップロードします。
+ファームウェアをOpenCRにアップロードします。
 
 ```
 $ cd ~/opencr_update
@@ -268,7 +268,7 @@ $ ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
 
 ### cFS(core Flght System)のセットアップ
 
-以下のコマンドを実行し、cFS(core Flght System)をダウンロードします。`[cFS workspace path]`には、cFSを格納する任意のファイルパスを入力してください。
+cFS(core Flght System)をダウンロードします。`[cFS workspace path]`には、cFSを格納する任意のファイルパスを入力してください。
 
 ```
 $ cd [cFS workspace path]
@@ -279,7 +279,7 @@ $ git submodule init
 $ git submodule update
 ```
 
-以下のコマンドを実行し、サンプルコードをコピーします。
+サンプルコードをコピーします。
 
 ```
 $ cp cfe/cmake/Makefile.sample Makefile
@@ -292,7 +292,7 @@ RACS2(ROS 2 and cFS System)のパッケージである`racs2_bridge`をインス
 
 #### 事前準備
 
-事前準備として、以下のコマンドを実行し、WebSocketをインストールします。
+WebSocketをインストールします。
 
 ```
 $ sudo apt install -y libwebsockets-dev
@@ -300,7 +300,7 @@ $ sudo apt install -y pip
 $ pip install protobuf websockets
 ```
 
-以下のコマンドを実行し、Protocol Buffersをインストールします。
+Protocol Buffersをインストールします。
 
 ```
 $ sudo apt install -y libwebsockets-dev protobuf-c-compiler libprotobuf-c-dev libprotobuf-dev
@@ -308,13 +308,13 @@ $ sudo apt install -y libwebsockets-dev protobuf-c-compiler libprotobuf-c-dev li
 
 #### ROS 2側の設定
 
-以下のコマンドを実行し、`turtlebot3_ws`に`bridge node`を配置します。
+`turtlebot3_ws`に`bridge node`を配置します。
 
 ```
 $ cp -pr ~/[Space TurtleBot workspace path]/space_ros_turtlebot3_demo/racs2_bridge/ROS2/Bridge/Server_Python/bridge_py_s ~/turtlebot3_ws/src
 ```
 
-以下のコマンドを実行し、TurtleBot3プロジェクトの先頭に戻り、ビルドを行います。
+TurtleBot3プロジェクトの先頭に戻り、ビルドを行います。
 
 ```
 $ cd ~/turtlebot3_ws
@@ -323,7 +323,7 @@ $ colcon build --symlink-install --parallel-workers 1
 
 #### cFS側のセットアップ
 
-以下のコマンドを実行し、cFS環境にbridgeアプリを配置します。
+cFS環境にbridgeアプリを配置します。
 
 ```
 $ cp -pr ~/[Space TurtleBot workspace path]/space_ros_turtlebot3_demo/racs2_bridge/cFS/Bridge/Client_C/apps/racs2_bridge_client ~/[cFS workspace path]/cFS/apps/
@@ -357,7 +357,7 @@ $ make install
 
 ### TurtleBot3制御ソフトウェアの起動
 
-以下のコマンドを実行し、PCからRaspberry Piにssh接続します。`[raspberry pi hostname]`には、Raspberry Piのホスト名を入力します。また、`[raspberry pi ip address]`には、Raspberry PiのIPアドレスを入力してください。
+PCからRaspberry Piにssh接続します。`[raspberry pi hostname]`には、Raspberry Piのホスト名を入力します。`[raspberry pi ip address]`には、Raspberry PiのIPアドレスを入力してください。
 
 ```
 $ ssh [raspberry pi hostname]@[raspberry pi ip address]
@@ -371,7 +371,7 @@ $ source install/setup.bash
 $ export TURTLEBOT3_MODEL=waffle_pi
 ```
 
-以下のコマンドを実行し、TurtleBot3制御ソフトウェアを起動します。
+TurtleBot3制御ソフトウェアを起動します。
 
 ```
 $ ros2 launch turtlebot3_bringup robot.launch.py
@@ -385,14 +385,14 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
 $ ssh [Raspberry Pi hostname]@[Raspberry PiのIPアドレス]
 ```
 
-接続後、以下のコマンドを実行し、TurtleBot3プロジェクトパスに移動します。
+接続後、TurtleBot3プロジェクトパスに移動します。
 
 ```
 $ cd ~/turtlebot3_ws
 $ source install/setup.bash
 ```
 
-以下のコマンドを実行し、ノードを起動します。
+ノードを起動します。
 
 ```
 $ ros2 run bridge_py_s bridge_py_s_node --ros-args --params-file ./src/bridge_py_s/config/params.yaml
@@ -429,4 +429,4 @@ cFSのターミナルでキーボード入力をすることにより、ロボ�
 
 ---
 
-[トップに戻る](#space-ros-racs2-demonstration-based-on-turtlebot3)
+[トップに戻る](#turtlebot3を用いたspace-rosracs2のデモンストレーション)
