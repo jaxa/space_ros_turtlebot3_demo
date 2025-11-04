@@ -44,6 +44,9 @@ Space ROSの一部であるRACS2(ROS 2 and cFS System)は、フライト実績�
 
 ロボットは、ROSの公式ロボットであるTurtleBot 3 Waffle PiとオプションとしてOpen MANIPULATOR-Xを組み合わせた構成となっています。ただし、本パッケージ自体は、TurtleBot3のみでも動作するので、Open MANIPULATOR-Xが無くても問題ありません。
 
+Space ROSでのRACS2のデモは下記を参照ください。
+
+- [Space ROS上でのRACS2のデモ](https://github.com/space-ros/demos/tree/main/racs2_demos_on_spaceros)
 
 ## ソフトウェア環境構築手順
 
@@ -104,9 +107,9 @@ $ sudo apt remove ros-humble-turtlebot3-msgs
 $ sudo apt remove ros-humble-turtlebot3
 $ mkdir -p ~/turtlebot3_ws/src
 $ cd ~/turtlebot3_ws/src/
-$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
-$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
-$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+$ git clone -b humble https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+$ git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+$ git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3.git
 $ cd ~/turtlebot3_ws
 $ colcon build --symlink-install
 $ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
@@ -430,3 +433,4 @@ cFSのターミナルでキーボード入力をすることにより、ロボ�
 ---
 
 [トップに戻る](#turtlebot3を用いたspace-rosracs2のデモンストレーション)
+
