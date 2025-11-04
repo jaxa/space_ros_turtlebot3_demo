@@ -37,11 +37,9 @@
 import os
 import select
 import sys
+import rclpy
 
 from geometry_msgs.msg import Twist
-from geometry_msgs.msg import TwistStamped
-import rclpy
-from rclpy.clock import Clock
 from rclpy.qos import QoSProfile
 
 if os.name == 'nt':
@@ -102,15 +100,15 @@ def print_vels(target_linear_velocity, target_angular_velocity):
         target_angular_velocity))
 
 
-def make_simple_profile(output_vel, input_vel, slop):
-    if input_vel > output_vel:
-        output_vel = min(input_vel, output_vel + slop)
-    elif input_vel < output_vel:
-        output_vel = max(input_vel, output_vel - slop)
+def make_simple_profile(output, input, slop):
+    if input > output:
+        output = min(input, output + slop)
+    elif input < output:
+        output = max(input, output - slop)
     else:
-        output_vel = input_vel
+        output = input
 
-    return output_vel
+    return output
 
 
 def constrain(input_vel, low_bound, high_bound):
@@ -144,13 +142,10 @@ def main():
         settings = termios.tcgetattr(sys.stdin)
 
     rclpy.init()
-    ROS_DISTRO = os.environ.get('ROS_DISTRO')
+
     qos = QoSProfile(depth=10)
     node = rclpy.create_node('teleop_keyboard')
-    if ROS_DISTRO == 'humble':
-        pub = node.create_publisher(Twist, 'cmd_vel', qos)
-    else:
-        pub = node.create_publisher(TwistStamped, 'cmd_vel', qos)
+    pub = node.create_publisher(Twist, 'cmd_vel', qos)
 
     status = 0
     target_linear_velocity = 0.0
@@ -160,7 +155,7 @@ def main():
 
     try:
         print(msg)
-        while (1):
+        while(1):
             key = get_key(settings)
             if key == 'w':
                 target_linear_velocity =\
@@ -196,65 +191,42 @@ def main():
                 print(msg)
                 status = 0
 
+            twist = Twist()
+
             control_linear_velocity = make_simple_profile(
                 control_linear_velocity,
                 target_linear_velocity,
                 (LIN_VEL_STEP_SIZE / 2.0))
+
+            twist.linear.x = control_linear_velocity
+            twist.linear.y = 0.0
+            twist.linear.z = 0.0
 
             control_angular_velocity = make_simple_profile(
                 control_angular_velocity,
                 target_angular_velocity,
                 (ANG_VEL_STEP_SIZE / 2.0))
 
-            if ROS_DISTRO == 'humble':
-                twist = Twist()
-                twist.linear.x = control_linear_velocity
-                twist.linear.y = 0.0
-                twist.linear.z = 0.0
+            twist.angular.x = 0.0
+            twist.angular.y = 0.0
+            twist.angular.z = control_angular_velocity
 
-                twist.angular.x = 0.0
-                twist.angular.y = 0.0
-                twist.angular.z = control_angular_velocity
-
-                pub.publish(twist)
-            else:
-                twist_stamped = TwistStamped()
-                twist_stamped.header.stamp = Clock().now().to_msg()
-                twist_stamped.header.frame_id = ''
-                twist_stamped.twist.linear.x = control_linear_velocity
-                twist_stamped.twist.linear.y = 0.0
-                twist_stamped.twist.linear.z = 0.0
-
-                twist_stamped.twist.angular.x = 0.0
-                twist_stamped.twist.angular.y = 0.0
-                twist_stamped.twist.angular.z = control_angular_velocity
-
-                pub.publish(twist_stamped)
+            pub.publish(twist)
 
     except Exception as e:
         print(e)
 
     finally:
-        if ROS_DISTRO == 'humble':
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.linear.y = 0.0
-            twist.linear.z = 0.0
-            twist.angular.x = 0.0
-            twist.angular.y = 0.0
-            twist.angular.z = 0.0
-            pub.publish(twist)
-        else:
-            twist_stamped = TwistStamped()
-            twist_stamped.header.stamp = Clock().now().to_msg()
-            twist_stamped.header.frame_id = ''
-            twist_stamped.twist.linear.x = control_linear_velocity
-            twist_stamped.twist.linear.y = 0.0
-            twist_stamped.twist.linear.z = 0.0
-            twist_stamped.twist.angular.x = 0.0
-            twist_stamped.twist.angular.y = 0.0
-            twist_stamped.twist.angular.z = control_angular_velocity
-            pub.publish(twist_stamped)
+        twist = Twist()
+        twist.linear.x = 0.0
+        twist.linear.y = 0.0
+        twist.linear.z = 0.0
+
+        twist.angular.x = 0.0
+        twist.angular.y = 0.0
+        twist.angular.z = 0.0
+
+        pub.publish(twist)
 
         if os.name != 'nt':
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)

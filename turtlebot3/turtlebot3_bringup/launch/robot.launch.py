@@ -26,34 +26,21 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import ThisLaunchFileDir
 from launch_ros.actions import Node
-from launch_ros.actions import PushRosNamespace
 
 
 def generate_launch_description():
     TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
-    ROS_DISTRO = os.environ.get('ROS_DISTRO')
     LDS_MODEL = os.environ['LDS_MODEL']
     LDS_LAUNCH_FILE = '/hlds_laser.launch.py'
 
-    namespace = LaunchConfiguration('namespace', default='')
-
     usb_port = LaunchConfiguration('usb_port', default='/dev/ttyACM0')
 
-    if ROS_DISTRO == 'humble':
-        tb3_param_dir = LaunchConfiguration(
-            'tb3_param_dir',
-            default=os.path.join(
-                get_package_share_directory('turtlebot3_bringup'),
-                'param',
-                ROS_DISTRO,
-                TURTLEBOT3_MODEL + '.yaml'))
-    else:
-        tb3_param_dir = LaunchConfiguration(
-            'tb3_param_dir',
-            default=os.path.join(
-                get_package_share_directory('turtlebot3_bringup'),
-                'param',
-                TURTLEBOT3_MODEL + '.yaml'))
+    tb3_param_dir = LaunchConfiguration(
+        'tb3_param_dir',
+        default=os.path.join(
+            get_package_share_directory('turtlebot3_bringup'),
+            'param',
+            TURTLEBOT3_MODEL + '.yaml'))
 
     if LDS_MODEL == 'LDS-01':
         lidar_pkg_dir = LaunchConfiguration(
@@ -64,11 +51,6 @@ def generate_launch_description():
             'lidar_pkg_dir',
             default=os.path.join(get_package_share_directory('ld08_driver'), 'launch'))
         LDS_LAUNCH_FILE = '/ld08.launch.py'
-    elif LDS_MODEL == 'LDS-03':
-        lidar_pkg_dir = LaunchConfiguration(
-            'lidar_pkg_dir',
-            default=os.path.join(get_package_share_directory('coin_d4_driver'), 'launch'))
-        LDS_LAUNCH_FILE = '/single_lidar_node.launch.py'
     else:
         lidar_pkg_dir = LaunchConfiguration(
             'lidar_pkg_dir',
@@ -92,33 +74,21 @@ def generate_launch_description():
             default_value=tb3_param_dir,
             description='Full path to turtlebot3 parameter file to load'),
 
-        DeclareLaunchArgument(
-            'namespace',
-            default_value=namespace,
-            description='Namespace for nodes'),
-
-        PushRosNamespace(namespace),
-
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [ThisLaunchFileDir(), '/turtlebot3_state_publisher.launch.py']),
-            launch_arguments={'use_sim_time': use_sim_time,
-                              'namespace': namespace}.items(),
+            launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([lidar_pkg_dir, LDS_LAUNCH_FILE]),
-            launch_arguments={'port': '/dev/ttyUSB0',
-                              'frame_id': 'base_scan',
-                              'namespace': namespace}.items(),
+            launch_arguments={'port': '/dev/ttyUSB0', 'frame_id': 'base_scan'}.items(),
         ),
 
         Node(
             package='turtlebot3_node',
             executable='turtlebot3_ros',
-            parameters=[
-                tb3_param_dir,
-                {'namespace': namespace}],
+            parameters=[tb3_param_dir],
             arguments=['-i', usb_port],
             output='screen'),
     ])

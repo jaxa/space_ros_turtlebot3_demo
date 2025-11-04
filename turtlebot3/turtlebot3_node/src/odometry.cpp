@@ -32,16 +32,12 @@ Odometry::Odometry(
   wheels_radius_(wheels_radius),
   use_imu_(false),
   publish_tf_(false),
-  last_theta_initialized_(false),
-  imu_angle_(0.0f),
-  robot_pose_({0.0, 0.0, 0.0}),
-  robot_vel_({0.0, 0.0, 0.0})
+  imu_angle_(0.0f)
 {
   RCLCPP_INFO(nh_->get_logger(), "Init Odometry");
 
   nh_->declare_parameter<std::string>("odometry.frame_id");
   nh_->declare_parameter<std::string>("odometry.child_frame_id");
-  nh_->declare_parameter<std::string>("namespace");
 
   nh_->declare_parameter<bool>("odometry.use_imu");
   nh_->declare_parameter<bool>("odometry.publish_tf");
@@ -65,16 +61,6 @@ Odometry::Odometry(
     "odometry.child_frame_id",
     child_frame_id_of_odometry_,
     std::string("base_footprint"));
-
-  nh_->get_parameter_or<std::string>(
-    "namespace",
-    name_space_,
-    std::string(""));
-
-  if (name_space_ != "") {
-    frame_id_of_odometry_ = name_space_ + "/" + frame_id_of_odometry_;
-    child_frame_id_of_odometry_ = name_space_ + "/" + child_frame_id_of_odometry_;
-  }
 
   auto qos = rclcpp::QoS(rclcpp::KeepLast(10));
   odom_pub_ = nh_->create_publisher<nav_msgs::msg::Odometry>("odom", qos);
@@ -122,15 +108,15 @@ Odometry::Odometry(
 
 void Odometry::joint_state_callback(const sensor_msgs::msg::JointState::SharedPtr joint_state_msg)
 {
-  const rclcpp::Time current_time = joint_state_msg->header.stamp;
-  static rclcpp::Time last_time = current_time;
-  const rclcpp::Duration duration = current_time - last_time;
+  static rclcpp::Time last_time = joint_state_msg->header.stamp;
+  rclcpp::Duration duration(rclcpp::Duration::from_nanoseconds(
+      joint_state_msg->header.stamp.nanosec - last_time.nanoseconds()));
 
   update_joint_state(joint_state_msg);
   calculate_odometry(duration);
-  publish(current_time);
+  publish(joint_state_msg->header.stamp);
 
-  last_time = current_time;
+  last_time = joint_state_msg->header.stamp;
 }
 
 void Odometry::joint_state_and_imu_callback(
@@ -143,16 +129,16 @@ void Odometry::joint_state_and_imu_callback(
     joint_state_msg->header.stamp.nanosec,
     imu_msg->header.stamp.nanosec);
 
-  const rclcpp::Time current_time = joint_state_msg->header.stamp;
-  static rclcpp::Time last_time = current_time;
-  const rclcpp::Duration duration = current_time - last_time;
+  static rclcpp::Time last_time = joint_state_msg->header.stamp;
+  rclcpp::Duration duration(rclcpp::Duration::from_nanoseconds(
+      joint_state_msg->header.stamp.nanosec - last_time.nanoseconds()));
 
   update_joint_state(joint_state_msg);
   update_imu(imu_msg);
   calculate_odometry(duration);
-  publish(current_time);
+  publish(joint_state_msg->header.stamp);
 
-  last_time = current_time;
+  last_time = joint_state_msg->header.stamp;
 }
 
 void Odometry::publish(const rclcpp::Time & now)
@@ -264,15 +250,8 @@ bool Odometry::calculate_odometry(const rclcpp::Duration & duration)
   delta_s = wheels_radius_ * (wheel_r + wheel_l) / 2.0;
 
   if (use_imu_) {
-    if (last_theta_initialized_) {
-      theta = imu_angle_;
-      delta_theta = theta - last_theta;
-    } else {
-      theta = imu_angle_;
-      last_theta = imu_angle_;
-      delta_theta = theta - last_theta;
-      last_theta_initialized_ = true;
-    }
+    theta = imu_angle_;
+    delta_theta = theta - last_theta;
   } else {
     theta = wheels_radius_ * (wheel_r - wheel_l) / wheels_separation_;
     delta_theta = theta;

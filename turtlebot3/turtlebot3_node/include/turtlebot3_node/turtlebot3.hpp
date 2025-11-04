@@ -17,8 +17,6 @@
 #ifndef TURTLEBOT3_NODE__TURTLEBOT3_HPP_
 #define TURTLEBOT3_NODE__TURTLEBOT3_HPP_
 
-#include <tf2_ros/transform_broadcaster.h>
-
 #include <array>
 #include <chrono>
 #include <list>
@@ -28,6 +26,7 @@
 #include <string>
 #include <queue>
 
+#include <tf2_ros/transform_broadcaster.h>
 #include <geometry_msgs/msg/twist.hpp>
 #include <nav_msgs/msg/odometry.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -35,6 +34,7 @@
 #include <sensor_msgs/msg/imu.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
 #include <turtlebot3_msgs/msg/sensor_state.hpp>
+#include <racs2_msg/msg/racs2_user_msg.hpp>
 
 #include "turtlebot3_node/control_table.hpp"
 #include "turtlebot3_node/devices/devices.hpp"
@@ -48,7 +48,7 @@
 #include "turtlebot3_node/sensors/joint_state.hpp"
 #include "turtlebot3_node/sensors/sensor_state.hpp"
 #include "turtlebot3_node/sensors/sensors.hpp"
-#include "turtlebot3_node/twist_subscriber.hpp"
+#include "RACS2Bridge_geometry_msgs.pb.h"
 
 namespace robotis
 {
@@ -108,7 +108,7 @@ private:
   rclcpp::TimerBase::SharedPtr publish_timer_;
   rclcpp::TimerBase::SharedPtr heartbeat_timer_;
 
-  std::unique_ptr<TwistSubscriber> cmd_vel_sub_;
+  rclcpp::Subscription<racs2_msg::msg::RACS2UserMsg>::SharedPtr cmd_vel_sub_;
 
   rclcpp::AsyncParametersClient::SharedPtr priv_parameters_client_;
   rclcpp::Subscription<rcl_interfaces::msg::ParameterEvent>::SharedPtr parameter_event_sub_;

@@ -43,7 +43,6 @@ class JointState : public Sensors
 public:
   explicit JointState(
     std::shared_ptr<rclcpp::Node> & nh,
-    std::shared_ptr<DynamixelSDKWrapper> & dxl_sdk_wrapper,
     const std::string & topic_name = "joint_states",
     const std::string & frame_id = "base_link");
 
@@ -53,10 +52,6 @@ public:
 
 private:
   rclcpp::Publisher<sensor_msgs::msg::JointState>::SharedPtr pub_;
-
-  std::string name_space_;
-  std::string wheel_left_joint_ = "wheel_left_joint";
-  std::string wheel_right_joint_ = "wheel_right_joint";
 };
 }  // namespace sensors
 }  // namespace turtlebot3

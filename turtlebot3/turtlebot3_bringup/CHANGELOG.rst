@@ -2,76 +2,13 @@
 Changelog for package turtlebot3_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.3.3 (2025-07-11)
-------------------
-* Supported COIN D4 LIDAR(ld03)
-* Contributors: Hyungyu Kim
-
-2.3.2 (2025-07-08)
-------------------
-* None
-
-2.3.1 (2025-05-30)
-------------------
-* Added launch arguments to camera.launch.py file to configure the camera image resolution at runtime via the CLI
-* Contributors: YeonSoo Noh
-
-2.3.0 (2025-05-23)
-------------------
-* Added a launch file using camera_ros to resolve the camera cropping issue
-* Contributors: YeonSoo Noh
-
-2.2.9 (2025-04-15)
-------------------
-* None
-
-2.2.8 (2025-04-11)
-------------------
-* Support flexible configuration of the frame_id used when publishing the topic
-* Contributors: Hyungyu Kim
-
-2.2.7 (2025-03-27)
-------------------
-* None
-
-2.2.6 (2025-03-24)
-------------------
-* Made it possible to choose between using the Twist type or the TwistStamped type in cmd_vel through a parameter
-* Contributors: Hyungyu Kim
-
-2.2.5 (2025-02-26)
-------------------
-* None
-
-2.2.4 (2025-02-21)
-------------------
-* None
-
-2.2.3 (2025-02-19)
-------------------
-* None
-
-2.2.2 (2025-02-19)
-------------------
-* None
-
-2.2.1 (2025-02-18)
-------------------
-* None
-
-2.2.0 (2025-02-13)
-------------------
-* Added namespace functionality for multi-robot support
-* Contributors: Hyungyu Kim
-
 2.1.5 (2022-05-26)
 ------------------
-* ROS 2 Humble Hawksbill supported
-* Contributors: Will Son
+* ROS2 Humble Hawksbill supported
 
 2.1.4 (2022-02-08)
 ------------------
-* Added LDS-02 support
+* add LDS-02 support
 
 2.1.3 (2021-09-02)
 ------------------
@@ -104,7 +41,7 @@ Changelog for package turtlebot3_bringup
 ------------------
 * Supported ROS 2 Dashing Diademata
 * Updated the CHANGELOG and version to release binary packages
-* Fixed ROS 2 dependencies and library install `#454 <https://github.com/ROBOTIS-GIT/turtlebot3/issues/454>`_
+* Fixed ROS2 dependencies and library install `#454 <https://github.com/ROBOTIS-GIT/turtlebot3/issues/454>`_
 * Contributors: Emerson Knapp, Darby Lim, Pyo
 
 1.2.2 (2019-08-20)

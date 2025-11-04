@@ -24,35 +24,14 @@
 
 using robotis::turtlebot3::sensors::JointState;
 
-static std::array<int32_t, robotis::turtlebot3::sensors::JOINT_NUM> last_diff_position,
-  last_position;
-
 JointState::JointState(
   std::shared_ptr<rclcpp::Node> & nh,
-  std::shared_ptr<DynamixelSDKWrapper> & dxl_sdk_wrapper,
   const std::string & topic_name,
   const std::string & frame_id)
 : Sensors(nh, frame_id)
 {
   pub_ = nh->create_publisher<sensor_msgs::msg::JointState>(topic_name, this->qos_);
-  last_position =
-  {dxl_sdk_wrapper->get_data_from_device<int32_t>(
-      extern_control_table.present_position_left.addr,
-      extern_control_table.present_position_left.length),
-    dxl_sdk_wrapper->get_data_from_device<int32_t>(
-      extern_control_table.present_position_right.addr,
-      extern_control_table.present_position_right.length)};
 
-  nh_->get_parameter_or<std::string>(
-    "namespace",
-    name_space_,
-    std::string(""));
-
-  if (name_space_ != "") {
-    frame_id_ = name_space_ + "/" + frame_id_;
-    wheel_right_joint_ = name_space_ + "/" + wheel_right_joint_;
-    wheel_left_joint_ = name_space_ + "/" + wheel_left_joint_;
-  }
   RCLCPP_INFO(nh_->get_logger(), "Succeeded to create joint state publisher");
 }
 
@@ -61,6 +40,8 @@ void JointState::publish(
   std::shared_ptr<DynamixelSDKWrapper> & dxl_sdk_wrapper)
 {
   auto msg = std::make_unique<sensor_msgs::msg::JointState>();
+
+  static std::array<int32_t, JOINT_NUM> last_diff_position, last_position;
 
   std::array<int32_t, JOINT_NUM> position =
   {dxl_sdk_wrapper->get_data_from_device<int32_t>(
@@ -89,8 +70,8 @@ void JointState::publish(
   msg->header.frame_id = this->frame_id_;
   msg->header.stamp = now;
 
-  msg->name.push_back(wheel_left_joint_);
-  msg->name.push_back(wheel_right_joint_);
+  msg->name.push_back("wheel_left_joint");
+  msg->name.push_back("wheel_right_joint");
 
   msg->position.push_back(TICK_TO_RAD * last_diff_position[0]);
   msg->position.push_back(TICK_TO_RAD * last_diff_position[1]);
