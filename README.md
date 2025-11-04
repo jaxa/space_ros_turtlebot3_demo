@@ -44,6 +44,9 @@ This package allows you to run RACS2, a part of Space ROS, on an actual robot. S
 
 The robot setup features the TurtleBot3 Waffle Pi, the official robot of ROS, optionally paired with the Open MANIPULATOR-X. However, the Open MANIPULATOR-X is not required to operate this package.
 
+Please refer to the following for the RACS2 demo on Space ROS:
+
+- [RACS2 demo on Space ROS](https://github.com/space-ros/demos/tree/main/racs2_demos_on_spaceros)
 
 ## Software Environment Setup
 
@@ -104,9 +107,9 @@ $ sudo apt remove ros-humble-turtlebot3-msgs
 $ sudo apt remove ros-humble-turtlebot3
 $ mkdir -p ~/turtlebot3_ws/src
 $ cd ~/turtlebot3_ws/src/
-$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
-$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
-$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+$ git clone -b humble https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+$ git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+$ git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3.git
 $ cd ~/turtlebot3_ws
 $ colcon build --symlink-install
 $ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
@@ -430,3 +433,4 @@ To stop the program, press `[Ctrl] + [C]` in each terminal.
 ---
 
 [Back to Top](#space-ros-racs2-demonstration-based-on-turtlebot3)
+
